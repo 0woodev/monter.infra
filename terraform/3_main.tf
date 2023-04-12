@@ -3,7 +3,7 @@ module "monter_api_gateway_v2" {
 
   env          = var.env
   gateway_prop = {
-    api_gateway_name : "api-gateway-v2"
+    api_gateway_name : "monter-api-gateway-v2"
   }
 
   project_prop = {
