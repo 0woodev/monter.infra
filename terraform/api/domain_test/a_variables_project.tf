@@ -6,4 +6,3 @@ variable "project_prop" {
     stage_name : "not-assigned"
   }
 }
-

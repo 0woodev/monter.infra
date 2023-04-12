@@ -27,8 +27,9 @@ module "monter_api_gateway_v2" {
   dynamodb_name_pattern = var.dynamodb_name_pattern
 }
 
-module "lambda_modularize_test" {
-  source = "./module/lambda"
+
+module "monter_domain_test" {
+  source = "./api/domain_test"
 
   env = var.env
 
@@ -38,14 +39,17 @@ module "lambda_modularize_test" {
     port : var.db_port
   }
 
+  api_gateway_v2_prop = {
+    id : module.monter_api_gateway_v2.out.api_gateway_id
+    arn : module.monter_api_gateway_v2.out.api_gateway_arn
+    authorizer_id : module.monter_api_gateway_v2.out.authorizer_id
+  }
+
   iam_prop = {
     aws_iam_role_arn: aws_iam_role.default_iam_for_lambda_role.arn
   }
 
-  function_prop = {
-    function_name = "v0_test_get"
-    handler = "v0_test_get.lambda_handler"
-  }
+  domain_name = "test"
 
   lambda_prop = {
     architectures : var.lambda_architectures
@@ -55,12 +59,8 @@ module "lambda_modularize_test" {
     lambda_timeout_time : var.lambda_timeout_time
   }
 
-  source_file_path = "v0_test_get/dist/build.zip"
-  layer_file_path = "v0_test_get/dist/layer.zip"
-
   project_prop = {
     project_name : var.project_name
     stage_name : var.stage_name
   }
 }
-
