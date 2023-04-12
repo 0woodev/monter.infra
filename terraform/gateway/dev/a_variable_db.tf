@@ -5,7 +5,7 @@ variable "dynamodb_name_pattern" {
 }
 
 variable "postgres_prop" {
-  description = "dynamo db name pattern"
+  description = "postgres property"
   type        = map(any)
   default     = {
     endpoint : "not-assigned"

@@ -18,11 +18,11 @@ module "monter_api_gateway_v2" {
     memory_size : 128 * 8
     lambda_timeout_time : 60
   }
+
   postgres_prop = {
     endpoint : var.db_endpoint
     port : var.db_port
   }
-
 
   dynamodb_name_pattern = var.dynamodb_name_pattern
 }

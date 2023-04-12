@@ -15,3 +15,15 @@ variable "lambda_runtime_version" {
   type        = string
   default     = "3.9"
 }
+
+variable "lambda_memory_size" {
+  description = "memory_size of lambda"
+  type        = number
+  default     = 128 * 8
+}
+
+variable "lambda_timeout_time" {
+  description = "time of timeout"
+  type        = number
+  default     = 60
+}
