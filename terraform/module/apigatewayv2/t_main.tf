@@ -31,8 +31,6 @@ resource "aws_apigatewayv2_stage" "stage" {
   api_id = aws_apigatewayv2_api.monter_server_gateway.id
   name   = "stage"
 
-  auto_deploy = true
-
   stage_variables = {
     stage_name = "stage"
     developMode = var.project_prop.stage_name
