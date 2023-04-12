@@ -2,3 +2,12 @@
 
 aws_account/access_key.txt
 aws_account/secret_access_key.txt
+
+terraform/.terraform
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+
+api_gateway_id.txt
+
+env/db_endpoint.txt
+env/db_port.txt
