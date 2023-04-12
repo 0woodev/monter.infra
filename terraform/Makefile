@@ -97,4 +97,4 @@ destroy: force set-variable
 force:
 
 build:
-	cd push.firebase && make unlink && make link && make build
+	cd ../api && make setup && make build

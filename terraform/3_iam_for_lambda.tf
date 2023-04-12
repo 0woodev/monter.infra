@@ -9,6 +9,7 @@ data "aws_iam_policy_document" "default_iam_for_lambda_role" {
       identifiers = [
         "lambda.amazonaws.com",
         "sqs.amazonaws.com",
+        "rds.amazonaws.com"
       ]
       type = "Service"
     }
