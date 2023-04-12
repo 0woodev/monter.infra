@@ -1,0 +1,1 @@
+값을 받아 api_gateway_v2 를 제작
