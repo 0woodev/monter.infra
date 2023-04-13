@@ -10,5 +10,8 @@ variable "postgres_prop" {
   default     = {
     endpoint : "not-assigned"
     port : "not-assigned"
+    schema_name: "not-assigned"
+    user: "not-assigned"
+    password: "not-assigned"
   }
 }

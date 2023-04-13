@@ -9,5 +9,4 @@ terraform/terraform.tfstate
 
 api_gateway_id.txt
 
-env/db_endpoint.txt
-env/db_port.txt
+env/db_*.txt
