@@ -1,7 +1,7 @@
 variable "lambda_architectures" {
   description = "identifier of db resource group"
   type        = string
-  default     = "x86_64"
+  default     = "arm64"
 }
 
 variable "lambda_runtime" {

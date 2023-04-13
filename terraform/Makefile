@@ -17,18 +17,31 @@ ifeq ($(FILE_EXISTS), 1)
 	$(info cat ${ROOT_DIR}/env/project_name.txt)
 	$(info cat ${ROOT_DIR}/env/stage_name.txt)
 	$(info cat ${ROOT_DIR}/env/dynamodb_name_pattern.txt)
+
 	$(info cat ${ROOT_DIR}/env/db_endpoint.txt)
 	$(info cat ${ROOT_DIR}/env/db_port.txt)
+	$(info cat ${ROOT_DIR}/env/db_name.txt)
+	$(info cat ${ROOT_DIR}/env/db_user.txt)
+	$(info cat ${ROOT_DIR}/env/db_password.txt)
+
 	echo "\n[project_name]"
 	cat "${ROOT_DIR}/env/project_name.txt"
 	echo "\n[stage_name]"
 	cat "${ROOT_DIR}/env/stage_name.txt"
 	echo "\n[dynamodb_name_pattern]"
 	cat "${ROOT_DIR}/env/dynamodb_name_pattern.txt"
+
 	echo "\n[db_endpoint]"
 	cat "${ROOT_DIR}/env/db_endpoint.txt"
 	echo "\n[db_port]"
 	cat "${ROOT_DIR}/env/db_port.txt"
+	echo "\n[db_name]"
+	cat "${ROOT_DIR}/env/db_name.txt"
+	echo "\n[db_user]"
+	cat "${ROOT_DIR}/env/db_user.txt"
+	echo "\n[db_password]"
+	cat "${ROOT_DIR}/env/db_password.txt"
+
 
 
 	$(eval export TF_VAR_project_name := $(shell cat ${ROOT_DIR}/env/project_name.txt || tr A-Z a-z))
@@ -36,6 +49,10 @@ ifeq ($(FILE_EXISTS), 1)
 	$(eval export TF_VAR_dynamodb_name_pattern := $(shell cat ${ROOT_DIR}/env/dynamodb_name_pattern.txt || tr A-Z a-z))
 	$(eval export TF_VAR_db_endpoint := $(shell cat ${ROOT_DIR}/env/db_endpoint.txt || tr A-Z a-z))
 	$(eval export TF_VAR_db_port := $(shell cat ${ROOT_DIR}/env/db_port.txt || tr A-Z a-z))
+	$(eval export TF_VAR_db_name := $(shell cat ${ROOT_DIR}/env/db_name.txt || tr A-Z a-z))
+	$(eval export TF_VAR_db_user := $(shell cat ${ROOT_DIR}/env/db_user.txt || tr A-Z a-z))
+	$(eval export TF_VAR_db_password := $(shell cat ${ROOT_DIR}/env/db_password.txt || tr A-Z a-z))
+
 	$(info set-variable --- ROOT_DIR = ${ROOT_DIR} - Done)
 else
 	$(info execute "make" will read configuration)
@@ -44,23 +61,51 @@ else
 	echo project_name.txt file is
 	cat ${ROOT_DIR}/env/project_name.txt;
 
-	echo ex\) v1alpha, v1beta, v1, v2alpha, v2beta, v2, ...
+	echo ex\) dev, stage, v1alpha, v1beta, v1, v2alpha, v2beta, v2, ...
 	@read -p "Enter Stage name: " stage_name; \
 	echo $$stage_name > ${ROOT_DIR}/env/stage_name.txt; \
 	echo stage_name.txt file is
 	cat ${ROOT_DIR}/env/stage_name.txt;
 
-	echo ex\) dev_song, song_p, dev_ted, push_dan, ...
-	@read -p "Enter db name pattern: " db_name_pattern; \
-	echo $$db_name_pattern > ${ROOT_DIR}/env/db_name_pattern.txt; \
-	echo db_name_pattern.txt file is
-	cat ${ROOT_DIR}/env/db_name_pattern.txt;
+	echo ex\) 0woodev_v1, dev_0woodev, ...
+	@read -p "Enter db name pattern: " dynamodb_name_pattern; \
+	echo $$dynamodb_name_pattern > ${ROOT_DIR}/env/dynamodb_name_pattern.txt; \
+	echo dynamodb_name_pattern.txt file is
+	cat ${ROOT_DIR}/env/dynamodb_name_pattern.txt;
 
-	echo ex\) dev_song, song_p, dev_ted, push_dan, ...
-	@read -p "Enter community db name pattern: " community_db_name_pattern; \
-	echo $$db_name_pattern > ${ROOT_DIR}/env/community_db_name_pattern.txt; \
-	echo db_name_pattern.txt file is
-	cat ${ROOT_DIR}/env/community_db_name_pattern.txt;
+	echo ex\) 3306, 5432, ...
+	@read -p "Enter postgres db port: " db_port; \
+	echo $$db_port > ${ROOT_DIR}/env/db_port.txt; \
+	echo db_port.txt file is
+	cat ${ROOT_DIR}/env/db_port.txt;
+
+	echo ex\) abcd.ap-northeast-2.rds.amazonaws.com ...
+
+	@read -p "Enter postgres db endpoint: " db_endpoint; \
+	echo $$db_endpoint > ${ROOT_DIR}/env/db_endpoint.txt; \
+	echo db_endpoint.txt file is
+	cat ${ROOT_DIR}/env/db_endpoint.txt;
+
+
+	echo ex\) KAKAO, KAKAO_BANK, NAVER, ...
+	@read -p "Enter postgres db schema name: " db_name; \
+	echo $$db_name > ${ROOT_DIR}/env/db_name.txt; \
+	echo db_name.txt file is
+	cat ${ROOT_DIR}/env/db_name.txt;
+
+
+	echo ex\) admin, user, user1, ...
+	@read -p "Enter postgres db user: " db_user; \
+	echo $$db_user > ${ROOT_DIR}/env/db_user.txt; \
+	echo db_user.txt file is
+	cat ${ROOT_DIR}/env/db_user.txt;
+
+	echo ex\) !qwer1234 ...
+	@read -p "Enter postgres db user password: " db_password; \
+	echo $$db_password > ${ROOT_DIR}/env/db_password.txt; \
+	echo db_password.txt file is
+	cat ${ROOT_DIR}/env/db_password.txt;
+
 
 	exit 0
 endif
@@ -86,7 +131,7 @@ apply: force set-variable
 	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
 	terraform apply
 
-applyq: force set-variable
+applyq: init
 	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
 	terraform apply -auto-approve
 

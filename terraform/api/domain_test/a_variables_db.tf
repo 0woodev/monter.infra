@@ -8,7 +8,10 @@ variable "postgres_prop" {
   description = "postgres property"
   type        = map(any)
   default     = {
-    endpoint : "not-assigned"
+    db_endpoint : "not-assigned"
     port : "not-assigned"
+    schema_name: "not-assigned"
+    user: "not-assigned"
+    password: "not-assigned"
   }
 }

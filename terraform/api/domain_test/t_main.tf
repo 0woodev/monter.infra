@@ -3,7 +3,7 @@ variable "function_list" {
     v0_test_get = {
       route_key        = "GET /test"
       is_authorized    = false
-      handler          = "v0_test.get.lambda_handler"
+      handler          = "v0_test_get.lambda_handler"
       source_file_path = "v0_test_get/dist/build.zip"
       layer_file_path  = "v0_test_get/dist/layer.zip"
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
@@ -45,6 +45,8 @@ module "monter_api_lambda" {
 
   source_file_path = each.value["source_file_path"]
   layer_file_path  = each.value["layer_file_path"]
+
+  monter_common_layer_arn = var.monter_common_layer_arn
 }
 
 module "monter_api_lambda_attachments" {
