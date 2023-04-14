@@ -10,3 +10,5 @@ api_gateway_id.txt
 
 env/db_*.txt
 env/jwt_secret_key.txt
+
+*tfstate*
