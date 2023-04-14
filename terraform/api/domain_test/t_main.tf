@@ -47,6 +47,8 @@ module "monter_api_lambda" {
   layer_file_path  = each.value["layer_file_path"]
 
   monter_common_layer_arn = var.monter_common_layer_arn
+
+  jwt_secret_key = var.jwt_secret_key
 }
 
 module "monter_api_lambda_attachments" {

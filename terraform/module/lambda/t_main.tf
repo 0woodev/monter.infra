@@ -53,13 +53,15 @@ resource "aws_lambda_function" "monter_lambda" {
   }
 
 
-#  layers = concat([for s in aws_lambda_layer_version.monter_lambda_layer :s.arn], formatlist(var.monter_common_layer_arn))
-   layers = var.monter_common_layer_arn != null ? concat([for s in aws_lambda_layer_version.monter_lambda_layer :s.arn], formatlist(var.monter_common_layer_arn)) : [for s in aws_lambda_layer_version.monter_lambda_layer :s.arn]
+  #  layers = concat([for s in aws_lambda_layer_version.monter_lambda_layer :s.arn], formatlist(var.monter_common_layer_arn))
+  layers = var.monter_common_layer_arn != null ? concat([
+    for s in aws_lambda_layer_version.monter_lambda_layer :s.arn
+  ], formatlist(var.monter_common_layer_arn)) : [for s in aws_lambda_layer_version.monter_lambda_layer :s.arn]
 
   environment {
     variables = {
-      project_name         = var.project_prop.project_name
-      stage_name           = var.project_prop.stage_name
+      project_name = var.project_prop.project_name
+      stage_name   = var.project_prop.stage_name
 
       postgres_endpoint    = var.postgres_prop.endpoint
       postgres_port        = var.postgres_prop.port
@@ -68,6 +70,8 @@ resource "aws_lambda_function" "monter_lambda" {
       postgres_db_password = var.postgres_prop.password
 
       dynamodb_name_pattern = var.dynamodb_name_pattern
+
+      jwt_secret_key = var.jwt_secret_key
     }
   }
 

@@ -23,6 +23,7 @@ ifeq ($(FILE_EXISTS), 1)
 	$(info cat ${ROOT_DIR}/env/db_name.txt)
 	$(info cat ${ROOT_DIR}/env/db_user.txt)
 	$(info cat ${ROOT_DIR}/env/db_password.txt)
+	$(info cat ${ROOT_DIR}/env/jwt_secret_key.txt)
 
 	echo "\n[project_name]"
 	cat "${ROOT_DIR}/env/project_name.txt"
@@ -41,6 +42,8 @@ ifeq ($(FILE_EXISTS), 1)
 	cat "${ROOT_DIR}/env/db_user.txt"
 	echo "\n[db_password]"
 	cat "${ROOT_DIR}/env/db_password.txt"
+	echo "\n[jwt_secret_key]"
+	cat "${ROOT_DIR}/env/jwt_secret_key.txt"
 
 
 
@@ -52,6 +55,7 @@ ifeq ($(FILE_EXISTS), 1)
 	$(eval export TF_VAR_db_name := $(shell cat ${ROOT_DIR}/env/db_name.txt || tr A-Z a-z))
 	$(eval export TF_VAR_db_user := $(shell cat ${ROOT_DIR}/env/db_user.txt || tr A-Z a-z))
 	$(eval export TF_VAR_db_password := $(shell cat ${ROOT_DIR}/env/db_password.txt || tr A-Z a-z))
+	$(eval export TF_VAR_jwt_secret_key := $(shell cat ${ROOT_DIR}/env/jwt_secret_key.txt || tr A-Z a-z))
 
 	$(info set-variable --- ROOT_DIR = ${ROOT_DIR} - Done)
 else
@@ -105,6 +109,12 @@ else
 	echo $$db_password > ${ROOT_DIR}/env/db_password.txt; \
 	echo db_password.txt file is
 	cat ${ROOT_DIR}/env/db_password.txt;
+
+	echo ex\) !qwer1234 ...
+	@read -p "Enter jwt secret key: " jwt_secret_key; \
+	echo $$jwt_secret_key > ${ROOT_DIR}/env/jwt_secret_key.txt; \
+	echo jwt_secret_key.txt file is
+	cat ${ROOT_DIR}/env/jwt_secret_key.txt;
 
 
 	exit 0

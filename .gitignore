@@ -1,0 +1,12 @@
+.idea
+
+aws_account/access_key.txt
+aws_account/secret_access_key.txt
+
+terraform/terraform*
+terraform/.terraform*
+
+api_gateway_id.txt
+
+env/db_*.txt
+env/jwt_secret_key.txt

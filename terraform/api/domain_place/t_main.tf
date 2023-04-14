@@ -9,6 +9,33 @@ variable "function_list" {
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
+    v1_place_update_lat_lng_post = {
+      route_key        = "POST /place/update/lat_lng_post"
+      is_authorized    = false
+      handler          = "d_place.v1_place_update_lat_lng_post.v1_place_update_lat_lng_post.lambda_handler"
+      source_file_path = "../api/d_place/v1_place_update_lat_lng_post/dist/build.zip"
+      layer_file_path  = "../api/d_place/v1_place_update_lat_lng_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_place_visit_post = {
+      route_key        = "POST /place/visit"
+      is_authorized    = false
+      handler          = "d_place.v1_place_visit_post.v1_place_visit_post.lambda_handler"
+      source_file_path = "../api/d_place/v1_place_visit_post/dist/build.zip"
+      layer_file_path  = "../api/d_place/v1_place_visit_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_place_visited_name_get = {
+      route_key        = "GET /place/visited/{name}"
+      is_authorized    = false
+      handler          = "d_place.v1_place_visited_name_get.v1_place_visited_name_get.lambda_handler"
+      source_file_path = "../api/d_place/v1_place_visited_name_get/dist/build.zip"
+      layer_file_path  = "../api/d_place/v1_place_visited_name_get/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
   }
 }
 
@@ -47,6 +74,8 @@ module "monter_api_lambda" {
   layer_file_path  = each.value["layer_file_path"]
 
   monter_common_layer_arn = var.monter_common_layer_arn
+
+  jwt_secret_key = var.jwt_secret_key
 }
 
 module "monter_api_lambda_attachments" {
