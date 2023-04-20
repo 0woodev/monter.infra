@@ -3,6 +3,16 @@ resource "aws_apigatewayv2_api" "monter_server_gateway" {
   description = "worker: ${var.project_prop.project_name}"
   protocol_type = "HTTP"
   route_selection_expression = "$request.method $request.path"
+
+  cors_configuration {
+    allow_credentials = null
+#    allow_headers     = ["*"]
+    allow_headers     = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token", "x-amz-user-agent",]
+    allow_methods     = ["*"]
+    allow_origins     = ["http://localhost:3000", "http://localhost:3001", "https://tbd-alpha.vercel.app"]
+    expose_headers    = null
+    max_age           = 86400
+  }
 }
 
 resource "aws_cloudwatch_log_group" "monter_apigatewayv2_cloudwatch_log_group" {
