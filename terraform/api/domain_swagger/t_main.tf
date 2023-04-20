@@ -1,20 +1,11 @@
 variable "function_list" {
   default = {
-    v1_auth_google_post = {
-      route_key        = "GET /auth/google"
+    v1_swagger_get = {
+      route_key        = "GET /swagger-ui"
       is_authorized    = false
-      handler          = "d_auth.v1_auth_google_post.v1_auth_google_post.lambda_handler"
-      source_file_path = "../api/d_auth/v1_auth_google_post/dist/build.zip"
-      layer_file_path  = "../api/d_auth/v1_auth_google_post/dist/layer.zip"
-      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
-      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
-    }
-    v1_auth_google_token_post = {
-      route_key        = "POST /auth/google/{token}"
-      is_authorized    = false
-      handler          = "d_auth.v1_auth_google_token_post.v1_auth_google_token_post.lambda_handler"
-      source_file_path = "../api/d_auth/v1_auth_google_token_post/dist/build.zip"
-      layer_file_path  = "../api/d_auth/v1_auth_google_token_post/dist/layer.zip"
+      handler          = "d_swagger.v1_swagger_get.v1_swagger_get.lambda_handler"
+      source_file_path = "../api/d_swagger/v1_swagger_get/dist/build.zip"
+      layer_file_path  = "../api/d_swagger/v1_swagger_get/dist/layer.zip"
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
@@ -32,7 +23,7 @@ module "monter_api_lambda" {
   postgres_prop         = var.postgres_prop
 
   iam_prop = {
-    aws_iam_role_arn : aws_iam_role.auth_domain_iam_for_lambda_role.arn
+    aws_iam_role_arn : aws_iam_role.swagger_domain_iam_for_lambda_role.arn
     #    aws_iam_role_arn : var.iam_prop.aws_iam_role_arn  # default iam role
   }
 

@@ -1,11 +1,11 @@
 variable "function_list" {
   default = {
-    v0_test_get = {
-      route_key        = "GET /test"
+    v1_user_put = {
+      route_key        = "PUT /user"
       is_authorized    = false
-      handler          = "v0_test_get.lambda_handler"
-      source_file_path = "v0_test_get/dist/build.zip"
-      layer_file_path  = "v0_test_get/dist/layer.zip"
+      handler          = "d_user.v1_user_put.v1_user_put.lambda_handler"
+      source_file_path = "../api/d_user/v1_user_put/dist/build.zip"
+      layer_file_path  = "../api/d_user/v1_user_put/dist/layer.zip"
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
@@ -23,7 +23,7 @@ module "monter_api_lambda" {
   postgres_prop         = var.postgres_prop
 
   iam_prop = {
-    aws_iam_role_arn : aws_iam_role.test_domain_iam_for_lambda_role.arn
+    aws_iam_role_arn : aws_iam_role.user_domain_iam_for_lambda_role.arn
     #    aws_iam_role_arn : var.iam_prop.aws_iam_role_arn  # default iam role
   }
 

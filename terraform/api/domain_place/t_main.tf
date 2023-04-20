@@ -36,6 +36,24 @@ variable "function_list" {
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
+    v1_place_visited_id_put = {
+      route_key        = "PUT /place/visited/{id}"
+      is_authorized    = false
+      handler          = "d_place.v1_place_visited_id_put.v1_place_visited_id_put.lambda_handler"
+      source_file_path = "../api/d_place/v1_place_visited_id_put/dist/build.zip"
+      layer_file_path  = "../api/d_place/v1_place_visited_id_put/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_place_visited_id_delete = {
+      route_key        = "DELETE /place/visited/{id}"
+      is_authorized    = false
+      handler          = "d_place.v1_place_visited_id_delete.v1_place_visited_id_delete.lambda_handler"
+      source_file_path = "../api/d_place/v1_place_visited_id_delete/dist/build.zip"
+      layer_file_path  = "../api/d_place/v1_place_visited_id_delete/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
   }
 }
 

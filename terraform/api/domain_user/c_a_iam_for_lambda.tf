@@ -2,7 +2,7 @@ locals {
   table_pattern = "*${var.dynamodb_name_pattern}*"
 }
 
-data "aws_iam_policy_document" "test_domain_iam_for_lambda_role" {
+data "aws_iam_policy_document" "user_domain_iam_for_lambda_role" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "test_domain_iam_for_lambda_role" {
 }
 
 
-data "aws_iam_policy_document" "test_domain_iam_for_lambda_policy" {
+data "aws_iam_policy_document" "user_domain_iam_for_lambda_policy" {
   version = "2012-10-17"
   statement {
     actions = [
@@ -132,22 +132,22 @@ data "aws_iam_policy_document" "test_domain_iam_for_lambda_policy" {
 }
 
 # IAM
-resource "aws_iam_role" "test_domain_iam_for_lambda_role" {
+resource "aws_iam_role" "user_domain_iam_for_lambda_role" {
   name = "${var.project_prop.project_name}_${var.domain_name}_iam_for_lambda"
 
-  assume_role_policy = data.aws_iam_policy_document.test_domain_iam_for_lambda_role.json
+  assume_role_policy = data.aws_iam_policy_document.user_domain_iam_for_lambda_role.json
 }
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
-resource "aws_iam_policy" "test_domain_iam_for_lambda_policy" {
+resource "aws_iam_policy" "user_domain_iam_for_lambda_policy" {
   name        = "${var.project_prop.project_name}_${var.domain_name}_api_service_policy"
   path        = "/"
   description = "IAM policy for logging from a lambda"
 
-  policy = data.aws_iam_policy_document.test_domain_iam_for_lambda_policy.json
+  policy = data.aws_iam_policy_document.user_domain_iam_for_lambda_policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "test_domain_api_service_policy_attachment" {
-  role       = aws_iam_role.test_domain_iam_for_lambda_role.name
-  policy_arn = aws_iam_policy.test_domain_iam_for_lambda_policy.arn
+resource "aws_iam_role_policy_attachment" "user_domain_api_service_policy_attachment" {
+  role       = aws_iam_role.user_domain_iam_for_lambda_role.name
+  policy_arn = aws_iam_policy.user_domain_iam_for_lambda_policy.arn
 }
