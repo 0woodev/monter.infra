@@ -18,6 +18,33 @@ variable "function_list" {
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
+    v1_auth_signup_post = {
+      route_key        = "POST /auth/sign-up"
+      is_authorized    = false
+      handler          = "d_auth.v1_auth_signup_post.v1_auth_signup_post.lambda_handler"
+      source_file_path = "../api/d_auth/v1_auth_signup_post/dist/build.zip"
+      layer_file_path  = "../api/d_auth/v1_auth_signup_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_auth_signin_post = {
+      route_key        = "POST /auth/sign-in"
+      is_authorized    = false
+      handler          = "d_auth.v1_auth_signin_post.v1_auth_signin_post.lambda_handler"
+      source_file_path = "../api/d_auth/v1_auth_signin_post/dist/build.zip"
+      layer_file_path  = "../api/d_auth/v1_auth_signin_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_auth_user_name_get = {
+      route_key        = "GET /auth/user/{name}"
+      is_authorized    = false
+      handler          = "d_auth.v1_auth_user_name_get.v1_auth_user_name_get.lambda_handler"
+      source_file_path = "../api/d_auth/v1_auth_user_name_get/dist/build.zip"
+      layer_file_path  = "../api/d_auth/v1_auth_user_name_get/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
   }
 }
 
