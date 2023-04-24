@@ -6,10 +6,10 @@ resource "aws_apigatewayv2_api" "monter_server_gateway" {
 
   cors_configuration {
     allow_credentials = null
-#    allow_headers     = ["*"]
-    allow_headers     = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token", "x-amz-user-agent",]
+    allow_headers     = ["*"]
+#    allow_headers     = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token", "x-amz-user-agent",]
     allow_methods     = ["*"]
-    allow_origins     = ["http://localhost:3000", "http://localhost:3001", "https://tbd-alpha.vercel.app"]
+    allow_origins     = ["http://localhost:3000", "http://localhost:3001", "https://tbd-alpha.vercel.app", "https://monter.fun"]
     expose_headers    = null
     max_age           = 86400
   }
