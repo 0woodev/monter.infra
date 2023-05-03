@@ -36,6 +36,24 @@ variable "function_list" {
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
+    v1_user_host_id_visitor_post = {
+      route_key        = "POST /user/{host_id}/visitor"
+      is_authorized    = false
+      handler          = "d_user.v1_user_host_id_visitor_post.v1_user_host_id_visitor_post.lambda_handler"
+      source_file_path = "../api/d_user/v1_user_host_id_visitor_post/dist/build.zip"
+      layer_file_path  = "../api/d_user/v1_user_host_id_visitor_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_user_host_id_visitor_get = {
+      route_key        = "GET /user/{host_id}/visitor"
+      is_authorized    = false
+      handler          = "d_user.v1_user_host_id_visitor_get.v1_user_host_id_visitor_get.lambda_handler"
+      source_file_path = "../api/d_user/v1_user_host_id_visitor_get/dist/build.zip"
+      layer_file_path  = "../api/d_user/v1_user_host_id_visitor_get/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
   }
 }
 
