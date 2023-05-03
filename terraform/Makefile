@@ -213,7 +213,7 @@ destroy-workspace: force set-variable set-workspace-variable
 	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
 	terraform workspace select ${TF_VAR_workspace}
 	terraform destroy
-	cd .. && rm ${TF_VAR_workspace}_api_gateway_id.txt
+	cd .. && rm ${TF_VAR_workspace}api_gateway_id.txt
 
 force:
 
