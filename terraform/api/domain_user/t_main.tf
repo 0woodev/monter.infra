@@ -9,6 +9,33 @@ variable "function_list" {
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
+    v1_user_list_get = {
+      route_key        = "POST /user/list"
+      is_authorized    = false
+      handler          = "d_user.v1_user_list_get.v1_user_list_get.lambda_handler"
+      source_file_path = "../api/d_user/v1_user_list_get/dist/build.zip"
+      layer_file_path  = "../api/d_user/v1_user_list_get/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_user_name_get = {
+      route_key        = "POST /user/{name}"
+      is_authorized    = false
+      handler          = "d_user.v1_user_name_get.v1_user_name_get.lambda_handler"
+      source_file_path = "../api/d_user/v1_user_name_get/dist/build.zip"
+      layer_file_path  = "../api/d_user/v1_user_name_get/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_user_verified_post = {
+      route_key        = "POST /user/verified"
+      is_authorized    = false
+      handler          = "d_user.v1_user_verified_post.v1_user_verified_post.lambda_handler"
+      source_file_path = "../api/d_user/v1_user_verified_post/dist/build.zip"
+      layer_file_path  = "../api/d_user/v1_user_verified_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
   }
 }
 
