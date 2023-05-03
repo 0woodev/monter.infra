@@ -10,7 +10,39 @@ else
 	FILE_EXISTS = 0
 endif
 
-.SILENT: set-variable
+ifneq ("$(wildcard ${ROOT_DIR}/env/workspace.txt)","")
+	WORKSPACE_FILE_EXISTS = 1
+else
+	WORKSPACE_FILE_EXISTS = 0
+endif
+
+.SILENT: set-variable set-workspace-variable
+
+set-workspace-variable:
+ifeq ($(WORKSPACE_FILE_EXISTS), 1)
+	$(info set-variable --- ROOT_DIR = ${ROOT_DIR})
+	$(info cat ${ROOT_DIR}/env/workspace.txt)
+	echo "\n[workspace]"
+	cat "${ROOT_DIR}/env/workspace.txt"
+
+	$(eval export TF_VAR_workspace := $(shell cat ${ROOT_DIR}/env/workspace.txt || tr A-Z a-z)_)
+	$(info set-variable --- ROOT_DIR = ${ROOT_DIR} - Done)
+
+else
+	$(info execute "make" will read configuration)
+
+	echo ex\) !qwer1234 ...
+	@read -p "Enter workspace: " workspace; \
+	echo $$workspace > ${ROOT_DIR}/env/workspace.txt; \
+	echo workspace.txt file is
+	cat ${ROOT_DIR}/env/workspace.txt;
+
+	exit 0
+endif
+
+
+
+
 set-variable:
 ifeq ($(FILE_EXISTS), 1)
 	$(info set-variable --- ROOT_DIR = ${ROOT_DIR})
@@ -56,6 +88,7 @@ ifeq ($(FILE_EXISTS), 1)
 	$(eval export TF_VAR_db_user := $(shell cat ${ROOT_DIR}/env/db_user.txt || tr A-Z a-z))
 	$(eval export TF_VAR_db_password := $(shell cat ${ROOT_DIR}/env/db_password.txt || tr A-Z a-z))
 	$(eval export TF_VAR_jwt_secret_key := $(shell cat ${ROOT_DIR}/env/jwt_secret_key.txt || tr A-Z a-z))
+	$(eval export TF_VAR_workspace := )
 
 	$(info set-variable --- ROOT_DIR = ${ROOT_DIR} - Done)
 else
@@ -116,6 +149,12 @@ else
 	echo jwt_secret_key.txt file is
 	cat ${ROOT_DIR}/env/jwt_secret_key.txt;
 
+	echo ex\) !qwer1234 ...
+	@read -p "Enter workspace: " workspace; \
+	echo $$workspace > ${ROOT_DIR}/env/workspace.txt; \
+	echo workspace.txt file is
+	cat ${ROOT_DIR}/env/workspace.txt;
+
 
 	exit 0
 endif
@@ -148,6 +187,33 @@ applyq: init
 destroy: force set-variable
 	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
 	terraform destroy
+
+# workspace
+
+workspace: force set-variable set-workspace-variable
+	$(info terraform plan with  ${TF_VAR_workspace})
+	terraform workspace new ${TF_VAR_workspace}
+
+plan-workspace: force set-variable set-workspace-variable
+	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
+	terraform workspace select ${TF_VAR_workspace}
+	terraform plan
+
+apply-workspace: force set-variable set-workspace-variable
+	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
+	terraform workspace select ${TF_VAR_workspace}
+	terraform apply
+
+applyq-workspace: init set-variable set-workspace-variable
+	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
+	terraform workspace select ${TF_VAR_workspace}
+	terraform apply -auto-approve
+
+destroy-workspace: force set-variable set-workspace-variable
+	$(info set-variable --- TF_VAR_project_name = ${TF_VAR_project_name} - Done)
+	terraform workspace select ${TF_VAR_workspace}
+	terraform destroy
+	cd .. && rm ${TF_VAR_workspace}_api_gateway_id.txt
 
 force:
 

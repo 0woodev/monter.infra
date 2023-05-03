@@ -7,7 +7,7 @@ module "monter_api_gateway_v2" {
   }
 
   project_prop = {
-    project_name : var.project_name
+    project_name : "${var.workspace}${var.project_name}"
     stage_name : var.stage_name
   }
 
@@ -41,7 +41,7 @@ module "monter_common_python_layer" {
   }
 
   project_prop = {
-    project_name : var.project_name
+    project_name : "${var.workspace}${var.project_name}"
     stage_name : var.stage_name
   }
 
@@ -85,7 +85,7 @@ module "monter_domain_place" {
   }
 
   project_prop = {
-    project_name : var.project_name
+    project_name : "${var.workspace}${var.project_name}"
     stage_name : var.stage_name
   }
 
@@ -132,7 +132,7 @@ module "monter_domain_auth" {
   }
 
   project_prop = {
-    project_name : var.project_name
+    project_name : "${var.workspace}${var.project_name}"
     stage_name : var.stage_name
   }
 
@@ -179,7 +179,7 @@ module "monter_domain_user" {
   }
 
   project_prop = {
-    project_name : var.project_name
+    project_name : "${var.workspace}${var.project_name}"
     stage_name : var.stage_name
   }
 
@@ -226,7 +226,7 @@ module "monter_domain_swagger" {
   }
 
   project_prop = {
-    project_name : var.project_name
+    project_name : "${var.workspace}${var.project_name}"
     stage_name : var.stage_name
   }
 

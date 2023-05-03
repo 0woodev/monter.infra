@@ -1,3 +1,9 @@
+variable "workspace" {
+  description = "workspace"
+  type        = string
+  default     = ""
+}
+
 variable "project_name" {
   description = "identifier of resource group"
   type        = string
