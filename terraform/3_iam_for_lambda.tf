@@ -133,14 +133,14 @@ data "aws_iam_policy_document" "default_iam_for_lambda_policy" {
 
 # IAM
 resource "aws_iam_role" "default_iam_for_lambda_role" {
-  name = "${var.project_name}_iam_for_lambda"
+  name = "${var.workspace}${var.project_name}_iam_for_lambda"
 
   assume_role_policy = data.aws_iam_policy_document.default_iam_for_lambda_role.json
 }
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
 resource "aws_iam_policy" "default_iam_for_lambda_policy" {
-  name        = "${var.project_name}_api_service_policy"
+  name        = "${var.workspace}${var.project_name}_api_service_policy"
   path        = "/"
   description = "IAM policy for logging from a lambda"
 
