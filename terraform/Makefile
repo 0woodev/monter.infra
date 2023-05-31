@@ -57,6 +57,10 @@ ifeq ($(FILE_EXISTS), 1)
 	$(info cat ${ROOT_DIR}/env/db_password.txt)
 	$(info cat ${ROOT_DIR}/env/jwt_secret_key.txt)
 
+	$(info cat ${ROOT_DIR}/env/from.txt)
+	$(info cat ${ROOT_DIR}/env/account_sid.txt)
+	$(info cat ${ROOT_DIR}/env/auth_token.txt)
+
 	echo "\n[project_name]"
 	cat "${ROOT_DIR}/env/project_name.txt"
 	echo "\n[stage_name]"
@@ -77,6 +81,12 @@ ifeq ($(FILE_EXISTS), 1)
 	echo "\n[jwt_secret_key]"
 	cat "${ROOT_DIR}/env/jwt_secret_key.txt"
 
+	echo "\n[from]"
+	cat "${ROOT_DIR}/env/from.txt"
+	echo "\n[account_sid]"
+	cat "${ROOT_DIR}/env/account_sid.txt"
+	echo "\n[auth_token]"
+	cat "${ROOT_DIR}/env/auth_token.txt"
 
 
 	$(eval export TF_VAR_project_name := $(shell cat ${ROOT_DIR}/env/project_name.txt || tr A-Z a-z))
@@ -89,6 +99,10 @@ ifeq ($(FILE_EXISTS), 1)
 	$(eval export TF_VAR_db_password := $(shell cat ${ROOT_DIR}/env/db_password.txt || tr A-Z a-z))
 	$(eval export TF_VAR_jwt_secret_key := $(shell cat ${ROOT_DIR}/env/jwt_secret_key.txt || tr A-Z a-z))
 	$(eval export TF_VAR_workspace := )
+
+	$(eval export TF_VAR_from := $(shell cat ${ROOT_DIR}/env/from.txt || tr A-Z a-z))
+	$(eval export TF_VAR_account_sid := $(shell cat ${ROOT_DIR}/env/account_sid.txt || tr A-Z a-z))
+	$(eval export TF_VAR_auth_token := $(shell cat ${ROOT_DIR}/env/auth_token.txt || tr A-Z a-z))
 
 	$(info set-variable --- ROOT_DIR = ${ROOT_DIR} - Done)
 else
@@ -154,6 +168,24 @@ else
 	echo $$workspace > ${ROOT_DIR}/env/workspace.txt; \
 	echo workspace.txt file is
 	cat ${ROOT_DIR}/env/workspace.txt;
+
+		echo ex\) !qwer1234 ...
+	@read -p "Enter postgres db user password: " from; \
+	echo $$from > ${ROOT_DIR}/env/from.txt; \
+	echo from.txt file is
+	cat ${ROOT_DIR}/env/from.txt;
+
+	echo ex\) !qwer1234 ...
+	@read -p "Enter jwt secret key: " account_sid; \
+	echo $$account_sid > ${ROOT_DIR}/env/account_sid.txt; \
+	echo account_sid.txt file is
+	cat ${ROOT_DIR}/env/account_sid.txt;
+
+	echo ex\) !qwer1234 ...
+	@read -p "Enter workspace: " auth_token; \
+	echo $$auth_token > ${ROOT_DIR}/env/auth_token.txt; \
+	echo auth_token.txt file is
+	cat ${ROOT_DIR}/env/auth_token.txt;
 
 
 	exit 0

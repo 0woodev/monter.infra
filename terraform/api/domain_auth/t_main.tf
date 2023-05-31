@@ -45,6 +45,25 @@ variable "function_list" {
       runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
       runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
     }
+
+    v1_auth_sms_code_post = {
+      route_key        = "POST /auth/sms/code"
+      is_authorized    = false
+      handler          = "d_auth.v1_auth_sms_code_post.v1_auth_sms_code_post.lambda_handler"
+      source_file_path = "../api/d_auth/v1_auth_sms_code_post/dist/build.zip"
+      layer_file_path  = "../api/d_auth/v1_auth_sms_code_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
+    v1_auth_phone_post = {
+      route_key        = "POST /auth/phone"
+      is_authorized    = false
+      handler          = "d_auth.v1_auth_phone_post.v1_auth_phone_post.lambda_handler"
+      source_file_path = "../api/d_auth/v1_auth_phone_post/dist/build.zip"
+      layer_file_path  = "../api/d_auth/v1_auth_phone_post/dist/layer.zip"
+      runtime          = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+      runtime_version  = null  # 해당 람다에 대해서 변경하고 싶다면 null 말고 다른 값을 넣으면 된다
+    }
   }
 }
 
@@ -57,6 +76,7 @@ module "monter_api_lambda" {
 
   dynamodb_name_pattern = var.dynamodb_name_pattern
   postgres_prop         = var.postgres_prop
+  twilio_prop           = var.twilio_prop
 
   iam_prop = {
     aws_iam_role_arn : aws_iam_role.auth_domain_iam_for_lambda_role.arn

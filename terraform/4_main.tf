@@ -64,6 +64,12 @@ module "monter_domain_place" {
     password : var.db_password
   }
 
+  twilio_prop = {
+    from : var.from,
+    account_sid : var.account_sid,
+    auth_token : var.auth_token
+  }
+
   api_gateway_v2_prop = {
     id : module.monter_api_gateway_v2.out.api_gateway_id
     arn : module.monter_api_gateway_v2.out.api_gateway_arn
@@ -109,6 +115,12 @@ module "monter_domain_auth" {
     schema_name : var.db_name
     user : var.db_user
     password : var.db_password
+  }
+
+  twilio_prop = {
+    from : var.from,
+    account_sid : var.account_sid,
+    auth_token : var.auth_token
   }
 
   api_gateway_v2_prop = {
@@ -158,6 +170,12 @@ module "monter_domain_user" {
     password : var.db_password
   }
 
+  twilio_prop = {
+    from : var.from,
+    account_sid : var.account_sid,
+    auth_token : var.auth_token
+  }
+
   api_gateway_v2_prop = {
     id : module.monter_api_gateway_v2.out.api_gateway_id
     arn : module.monter_api_gateway_v2.out.api_gateway_arn
@@ -203,6 +221,12 @@ module "monter_domain_swagger" {
     schema_name : var.db_name
     user : var.db_user
     password : var.db_password
+  }
+
+  twilio_prop = {
+    from : var.from,
+    account_sid : var.account_sid,
+    auth_token : var.auth_token
   }
 
   api_gateway_v2_prop = {

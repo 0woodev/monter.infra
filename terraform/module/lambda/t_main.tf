@@ -72,6 +72,10 @@ resource "aws_lambda_function" "monter_lambda" {
       dynamodb_name_pattern = var.dynamodb_name_pattern
 
       jwt_secret_key = var.jwt_secret_key
+
+      from = var.twilio_prop.from
+      account_sid = var.twilio_prop.account_sid
+      auth_token = var.twilio_prop.auth_token
     }
   }
 

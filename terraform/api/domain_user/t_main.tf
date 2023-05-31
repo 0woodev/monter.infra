@@ -66,6 +66,7 @@ module "monter_api_lambda" {
 
   dynamodb_name_pattern = var.dynamodb_name_pattern
   postgres_prop         = var.postgres_prop
+  twilio_prop           = var.twilio_prop
 
   iam_prop = {
     aws_iam_role_arn : aws_iam_role.user_domain_iam_for_lambda_role.arn
